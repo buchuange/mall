@@ -1,7 +1,7 @@
 package com.atstar.mall.handler;
 
 import com.atstar.mall.exception.UserLoginException;
-import com.atstar.mall.vo.ResponseVo;
+import com.atstar.mall.vo.ResponseVO;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,15 +18,15 @@ public class RuntimeExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(RuntimeException.class)
-    public ResponseVo handle(RuntimeException e) {
+    public ResponseVO handle(RuntimeException e) {
 
-        return ResponseVo.error(ERROR, e.getMessage());
+        return ResponseVO.error(ERROR, e.getMessage());
     }
 
     @ResponseBody
     @ExceptionHandler(UserLoginException.class)
-    public ResponseVo handle(UserLoginException e) {
+    public ResponseVO handle(UserLoginException e) {
 
-        return ResponseVo.error(NEED_LOGIN);
+        return ResponseVO.error(NEED_LOGIN);
     }
 }

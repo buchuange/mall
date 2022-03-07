@@ -1,7 +1,7 @@
 package com.atstar.mall.service;
 
 import com.atstar.mall.domain.User;
-import com.atstar.mall.vo.ResponseVo;
+import com.atstar.mall.vo.ResponseVO;
 
 /**
  * @Author: Dawn
@@ -13,10 +13,10 @@ public interface IUserService {
     /**
      * 注册
      */
-    ResponseVo<User> register(User user);
+    ResponseVO<User> register(User user);
 
     /**
      * 登录
      */
-    ResponseVo<User> login(String username, String password);
+    ResponseVO<User> login(String username, String password);
 }

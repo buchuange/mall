@@ -5,10 +5,8 @@ import com.atstar.mall.domain.User;
 import com.atstar.mall.enums.ResponseEnum;
 import com.atstar.mall.enums.RoleEnum;
 import com.atstar.mall.service.IUserService;
-import com.atstar.mall.vo.ResponseVo;
+import com.atstar.mall.vo.ResponseVO;
 
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,7 @@ public class UserServiceImplTest extends MallApplicationTests {
 
     @Test
     public void login() {
-        ResponseVo<User> responseVo = userService.login(USERNAME, PASSWORD);
+        ResponseVO<User> responseVo = userService.login(USERNAME, PASSWORD);
         Assert.state(ResponseEnum.SUCCESS.getCode() == responseVo.getStatus(), "登录失败");
     }
 }

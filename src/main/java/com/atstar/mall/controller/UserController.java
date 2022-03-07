@@ -4,11 +4,10 @@ import com.atstar.mall.domain.User;
 import com.atstar.mall.form.UserLoginForm;
 import com.atstar.mall.form.UserRegisterForm;
 import com.atstar.mall.service.IUserService;
-import com.atstar.mall.vo.ResponseVo;
+import com.atstar.mall.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,6 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 import static com.atstar.mall.consts.MallConst.CURRENT_USER;
-import static com.atstar.mall.enums.ResponseEnum.NEED_LOGIN;
 import static com.atstar.mall.enums.ResponseEnum.PARAM_ERROR;
 
 /**
@@ -33,7 +31,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/user/register")
-    public ResponseVo register(@Valid @RequestBody UserRegisterForm userRegisterForm,
+    public ResponseVO register(@Valid @RequestBody UserRegisterForm userRegisterForm,
                                BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -41,7 +39,7 @@ public class UserController {
                     Objects.requireNonNull(bindingResult.getFieldError()).getField(),
                     bindingResult.getFieldError().getDefaultMessage());
 
-            return ResponseVo.error(PARAM_ERROR, bindingResult);
+            return ResponseVO.error(PARAM_ERROR, bindingResult);
         }
 
         User user = new User();
@@ -53,14 +51,14 @@ public class UserController {
 
 
     @PostMapping("/user/login")
-    public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
+    public ResponseVO<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
                                   BindingResult bindingResult, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
-            return ResponseVo.error(PARAM_ERROR, bindingResult);
+            return ResponseVO.error(PARAM_ERROR, bindingResult);
         }
 
-        ResponseVo<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
+        ResponseVO<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
 
         session.setAttribute(CURRENT_USER, userResponseVo.getData());
 
@@ -69,12 +67,12 @@ public class UserController {
 
     // session保存在内存中，改进版 token+redis
     @GetMapping("/user")
-    public ResponseVo<User> userInfo(HttpSession session) {
+    public ResponseVO<User> userInfo(HttpSession session) {
 
         log.info("/user sessionId={}", session.getId());
         User user = (User) session.getAttribute(CURRENT_USER);
 
-        return ResponseVo.success(user);
+        return ResponseVO.success(user);
     }
 
     //TODO 判断登录状态，拦截器
@@ -83,11 +81,11 @@ public class UserController {
      *{@link org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory} getSessionTimeoutInMinutes
      */
     @PostMapping("/user/logout")
-    public ResponseVo logout(HttpSession session) {
+    public ResponseVO logout(HttpSession session) {
 
         log.info("/user/logout sessionId={}", session.getId());
         session.removeAttribute(CURRENT_USER);
 
-        return ResponseVo.successByMsg("退出成功");
+        return ResponseVO.successByMsg("退出成功");
     }
 }
