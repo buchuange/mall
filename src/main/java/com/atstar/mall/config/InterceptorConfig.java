@@ -21,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         String[] addPathPatterns = {"/**"};
 
         // 要排除的路径，排除的路径说明不需要用户登录也可访问
-        String[] excludePathPatterns = {"/user/register", "/user/login"};
+        String[] excludePathPatterns = {"/user/register", "/user/login", "/categories"};
 
 
         // mvc:interceptor

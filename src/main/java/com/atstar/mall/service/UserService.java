@@ -7,7 +7,7 @@ import com.atstar.mall.vo.ResponseVO;
  * @Author: Dawn
  * @Date: 2022/3/4 19:30
  */
-public interface IUserService {
+public interface UserService {
 
 
     /**

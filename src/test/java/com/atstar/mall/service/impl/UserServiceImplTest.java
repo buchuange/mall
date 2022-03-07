@@ -4,7 +4,7 @@ import com.atstar.mall.MallApplicationTests;
 import com.atstar.mall.domain.User;
 import com.atstar.mall.enums.ResponseEnum;
 import com.atstar.mall.enums.RoleEnum;
-import com.atstar.mall.service.IUserService;
+import com.atstar.mall.service.UserService;
 import com.atstar.mall.vo.ResponseVO;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ public class UserServiceImplTest extends MallApplicationTests {
 
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @BeforeEach
     public void register() {

@@ -3,7 +3,7 @@ package com.atstar.mall.service.impl;
 import com.atstar.mall.domain.User;
 import com.atstar.mall.enums.RoleEnum;
 import com.atstar.mall.mapper.UserMapper;
-import com.atstar.mall.service.IUserService;
+import com.atstar.mall.service.UserService;
 import com.atstar.mall.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import static com.atstar.mall.enums.ResponseEnum.*;
  * @Date: 2022/3/4 19:36
  */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;

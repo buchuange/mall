@@ -3,7 +3,7 @@ package com.atstar.mall.controller;
 import com.atstar.mall.domain.User;
 import com.atstar.mall.form.UserLoginForm;
 import com.atstar.mall.form.UserRegisterForm;
-import com.atstar.mall.service.IUserService;
+import com.atstar.mall.service.UserService;
 import com.atstar.mall.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -28,7 +28,7 @@ import static com.atstar.mall.enums.ResponseEnum.PARAM_ERROR;
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @PostMapping("/user/register")
     public ResponseVO register(@Valid @RequestBody UserRegisterForm userRegisterForm,

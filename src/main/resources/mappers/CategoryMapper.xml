@@ -19,6 +19,14 @@
     from mall_category
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="listCategories" resultMap="BaseResultMap">
+    select
+    id, parent_id, name, sort_order
+    from mall_category
+    where status = 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_category
     where id = #{id,jdbcType=INTEGER}
