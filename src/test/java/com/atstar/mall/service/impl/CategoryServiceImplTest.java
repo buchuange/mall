@@ -27,7 +27,7 @@ public class CategoryServiceImplTest extends MallApplicationTests {
 
         ResponseVO<List<CategoryVO>> listCategories = categoryService.listCategories();
 
-        Assert.state(ResponseEnum.SUCCESS.getCode() == listCategories.getStatus(), "测试失败");
+        Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCategories.getStatus()), "测试失败");
 
     }
 

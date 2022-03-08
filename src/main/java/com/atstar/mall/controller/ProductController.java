@@ -1,10 +1,12 @@
 package com.atstar.mall.controller;
 
 import com.atstar.mall.service.ProductService;
+import com.atstar.mall.vo.ProductDetailVO;
 import com.atstar.mall.vo.ResponseVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,12 @@ public class ProductController {
                                              @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
 
         return productService.listProducts(categoryId, pageNum, pageSize);
+    }
+
+    @GetMapping("/products/{productId}")
+    public ResponseVO<ProductDetailVO> getProductById(@PathVariable("productId") Integer prductId) {
+
+        return productService.getProductById(prductId);
     }
 
 }

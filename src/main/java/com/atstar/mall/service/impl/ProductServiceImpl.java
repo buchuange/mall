@@ -1,9 +1,11 @@
 package com.atstar.mall.service.impl;
 
 import com.atstar.mall.domain.Product;
+import com.atstar.mall.enums.ResponseEnum;
 import com.atstar.mall.mapper.ProductMapper;
 import com.atstar.mall.service.CategoryService;
 import com.atstar.mall.service.ProductService;
+import com.atstar.mall.vo.ProductDetailVO;
 import com.atstar.mall.vo.ProductVO;
 import com.atstar.mall.vo.ResponseVO;
 import com.github.pagehelper.PageHelper;
@@ -17,6 +19,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.atstar.mall.enums.ProductStatusEnum.DELETE;
+import static com.atstar.mall.enums.ProductStatusEnum.OFF_SALE;
 
 /**
  * @Author: Dawn
@@ -57,5 +62,23 @@ public class ProductServiceImpl implements ProductService {
         pageInfo.setList(productVOList);
 
         return ResponseVO.success(pageInfo);
+    }
+
+    @Override
+    public ResponseVO<ProductDetailVO> getProductById(Integer productId) {
+
+        Product product = productMapper.selectByPrimaryKey(productId);
+
+        if (product.getStatus().equals(OFF_SALE.getCode()) || product.getStatus().equals(DELETE.getCode())) {
+            return ResponseVO.error(ResponseEnum.PRODUCT_OFF_SALE_OR_DELETE);
+        }
+
+        ProductDetailVO productDetailVO = new ProductDetailVO();
+        BeanUtils.copyProperties(product, productDetailVO);
+
+        // 敏感数据处理
+        productDetailVO.setStock(productDetailVO.getStock() > 100 ? 100 : productDetailVO.getStock());
+
+        return ResponseVO.success(productDetailVO);
     }
 }

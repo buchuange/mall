@@ -3,6 +3,7 @@ package com.atstar.mall.service.impl;
 import com.atstar.mall.MallApplicationTests;
 import com.atstar.mall.enums.ResponseEnum;
 import com.atstar.mall.service.ProductService;
+import com.atstar.mall.vo.ProductDetailVO;
 import com.atstar.mall.vo.ProductVO;
 import com.atstar.mall.vo.ResponseVO;
 import com.github.pagehelper.PageInfo;
@@ -26,7 +27,15 @@ public class ProductServiceImplTest extends MallApplicationTests {
         ResponseVO<PageInfo> listProducts = productService.listProducts(100002, 1, 2);
 
         log.info("vo={}", listProducts);
-        Assert.state(ResponseEnum.SUCCESS.getCode() == listProducts.getStatus(), "测试失败");
+        Assert.state(ResponseEnum.SUCCESS.getCode().equals(listProducts.getStatus()), "测试失败");
+
+    }
+
+    @Test
+    public void getProductById() {
+
+        ResponseVO<ProductDetailVO> responseVO = productService.getProductById(26);
+        Assert.state(ResponseEnum.SUCCESS.getCode().equals(responseVO.getStatus()), "测试失败");
 
     }
 }

@@ -33,6 +33,6 @@ public class UserServiceImplTest extends MallApplicationTests {
     @Test
     public void login() {
         ResponseVO<User> responseVo = userService.login(USERNAME, PASSWORD);
-        Assert.state(ResponseEnum.SUCCESS.getCode() == responseVo.getStatus(), "登录失败");
+        Assert.state(ResponseEnum.SUCCESS.getCode().equals(responseVo.getStatus()), "登录失败");
     }
 }
