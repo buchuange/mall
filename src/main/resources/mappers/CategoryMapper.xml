@@ -22,7 +22,7 @@
 
   <select id="listCategories" resultMap="BaseResultMap">
     select
-    id, parent_id, name, sort_order
+    <include refid="Base_Column_List" />
     from mall_category
     where status = 1
   </select>

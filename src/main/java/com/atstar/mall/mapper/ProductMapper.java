@@ -1,20 +1,22 @@
 package com.atstar.mall.mapper;
 
 import com.atstar.mall.domain.Product;
-import com.atstar.mall.domain.ProductWithBLOBs;
+
+import java.util.List;
+import java.util.Set;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(ProductWithBLOBs record);
+    int insert(Product record);
 
-    int insertSelective(ProductWithBLOBs record);
+    int insertSelective(Product record);
 
-    ProductWithBLOBs selectByPrimaryKey(Integer id);
+    Product selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(ProductWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(ProductWithBLOBs record);
+    int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectByCategoryIdSet(Set<Integer> categoryIdSet);
 }

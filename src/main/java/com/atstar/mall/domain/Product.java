@@ -17,6 +17,10 @@ public class Product {
 
     private String mainImage;
 
+    private String subImages;
+
+    private String detail;
+
     private BigDecimal price;
 
     private Integer stock;
