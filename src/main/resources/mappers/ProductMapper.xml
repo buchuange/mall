@@ -39,6 +39,19 @@
     </if>
   </select>
 
+  <select id="selectByProductIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_product
+    <where>
+      <if test="productIds.size() > 0">
+        and id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+        #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_product

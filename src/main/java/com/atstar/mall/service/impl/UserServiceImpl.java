@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.nio.charset.StandardCharsets;
 
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectByUsername(username);
 
-        if (user == null) {
+        if (ObjectUtils.isEmpty(user)) {
             // 用户名不存在（返回用户名或密码错误）
             return ResponseVO.error(USERNAME_OR_PASSWORD_ERROR);
         }
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService {
         }
 
 
-        user.setPassword(null);
+        user.setPassword("");
         return ResponseVO.success(user);
     }
 }

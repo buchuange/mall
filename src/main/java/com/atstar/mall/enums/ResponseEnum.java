@@ -21,7 +21,13 @@ public enum ResponseEnum {
 
     USERNAME_OR_PASSWORD_ERROR(11, "用户名或密码错误"),
 
-    PRODUCT_OFF_SALE_OR_DELETE(12, "该商品已下架或者删除");
+    PRODUCT_OFF_SALE_OR_DELETE(12, "该商品已下架或者删除"),
+
+    PRODUCT_NOT_EXIST(13, "商品不存在"),
+
+    PRODUCT_STOCK_ERROR(14, "库存不正确"),
+
+    CART_PRODUCT_NOT_EXIST(13, "购物车里无此商品");
 
     Integer code;
 

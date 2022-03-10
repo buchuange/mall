@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/mall
     username: root
     password: 100322
+  redis:
+    host: 192.168.206.128
+    port: 6380
 
 # 配置mapper.xml文件的位置
 mybatis:

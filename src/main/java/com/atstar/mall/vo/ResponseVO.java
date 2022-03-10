@@ -50,10 +50,4 @@ public class ResponseVO<T> {
     public static <T> ResponseVO<T> error(ResponseEnum responseEnum, String msg) {
         return new ResponseVO<>(responseEnum.getCode(), msg);
     }
-
-    public static <T> ResponseVO<T> error(ResponseEnum responseEnum, BindingResult bindingResult) {
-        return new ResponseVO<>(responseEnum.getCode(),
-                Objects.requireNonNull(bindingResult.getFieldError().getField()) + " " +
-                bindingResult.getFieldError().getDefaultMessage());
-    }
 }
