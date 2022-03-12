@@ -46,8 +46,8 @@
     <where>
       <if test="productIds.size() > 0">
         and id in
-        <foreach collection="list" item="item" open="(" close=")" separator=",">
-        #{item}
+        <foreach collection="collection" item="item" open="(" close=")" separator=",">
+          #{item}
         </foreach>
       </if>
     </where>

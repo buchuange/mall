@@ -20,5 +20,5 @@ public interface ProductMapper {
 
     List<Product> selectByCategoryIdSet(Set<Integer> categoryIdSet);
 
-    List<Product> selectByProductIds(List<Integer> productIds);
+    List<Product> selectByProductIds(Set<Integer> productIds);
 }

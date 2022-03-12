@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,14 +25,18 @@ class CartServiceImplTest extends MallApplicationTests {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    private Integer uid = 4;
+
+    private Integer productId = 26;
+
     @Test
     void saveCart() {
 
         CartAddForm cartAddForm = new CartAddForm();
-        cartAddForm.setProductId(29);
+        cartAddForm.setProductId(productId);
         cartAddForm.setSelected(true);
 
-        ResponseVO<CartVO> listCarts= cartService.saveCart(1, cartAddForm);
+        ResponseVO<CartVO> listCarts= cartService.saveCart(uid, cartAddForm);
         log.info("result={}", gson.toJson(listCarts));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -39,7 +44,7 @@ class CartServiceImplTest extends MallApplicationTests {
 
     @Test
     void listCarts() {
-        ResponseVO<CartVO> listCarts = cartService.listCarts(1);
+        ResponseVO<CartVO> listCarts = cartService.listCarts(uid);
 
         log.info("result={}", gson.toJson(listCarts));
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -53,7 +58,7 @@ class CartServiceImplTest extends MallApplicationTests {
         cartUpdateForm.setQuantity(10);
         cartUpdateForm.setSelected(false);
 
-        ResponseVO<CartVO> listCarts= cartService.updateCart(1, 29, cartUpdateForm);
+        ResponseVO<CartVO> listCarts= cartService.updateCart(uid, productId, cartUpdateForm);
         log.info("result={}", gson.toJson(listCarts));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -62,7 +67,7 @@ class CartServiceImplTest extends MallApplicationTests {
     @Test
     void deleteCart() {
 
-        ResponseVO<CartVO> listCarts = cartService.deleteCart(1, 29);
+        ResponseVO<CartVO> listCarts = cartService.deleteCart(uid, productId);
         log.info("result={}", gson.toJson(listCarts));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -71,7 +76,7 @@ class CartServiceImplTest extends MallApplicationTests {
     @Test
     void selectAll() {
 
-        ResponseVO<CartVO> listCarts = cartService.selectAll(1);
+        ResponseVO<CartVO> listCarts = cartService.selectAll(uid);
         log.info("result={}", gson.toJson(listCarts));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -80,7 +85,7 @@ class CartServiceImplTest extends MallApplicationTests {
     @Test
     void unSelectAll() {
 
-        ResponseVO<CartVO> listCarts = cartService.unSelectAll(1);
+        ResponseVO<CartVO> listCarts = cartService.unSelectAll(uid);
         log.info("result={}", gson.toJson(listCarts));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCarts.getStatus()), "测试失败");
@@ -89,7 +94,7 @@ class CartServiceImplTest extends MallApplicationTests {
     @Test
     void countCart() {
 
-        ResponseVO<Integer> countCart = cartService.countCart(1);
+        ResponseVO<Integer> countCart = cartService.countCart(uid);
 
         log.info("result={}", gson.toJson(countCart));
 

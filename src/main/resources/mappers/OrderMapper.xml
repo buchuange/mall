@@ -5,7 +5,6 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="shipping_id" jdbcType="INTEGER" property="shippingId" />
     <result column="payment" jdbcType="DECIMAL" property="payment" />
     <result column="payment_type" jdbcType="INTEGER" property="paymentType" />
     <result column="postage" jdbcType="INTEGER" property="postage" />
@@ -18,8 +17,8 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_no, user_id, shipping_id, payment, payment_type, postage, status, payment_time, 
-    send_time, end_time, close_time, create_time, update_time
+    id, order_no, user_id, payment, payment_type, postage, status, payment_time, send_time, 
+    end_time, close_time, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,21 +26,33 @@
     from mall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectByUid" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from mall_order
+      where user_id = #{uid,jdbcType=INTEGER}
+    </select>
+  <select id="selectByOrderNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_order
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.atstar.mall.domain.Order">
     insert into mall_order (id, order_no, user_id, 
-      shipping_id, payment, payment_type, 
-      postage, status, payment_time, 
-      send_time, end_time, close_time, 
-      create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
-      #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, 
-      #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
-      #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      payment, payment_type, postage, 
+      status, payment_time, send_time, 
+      end_time, close_time, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, #{postage,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, #{sendTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.atstar.mall.domain.Order">
     insert into mall_order
@@ -54,9 +65,6 @@
       </if>
       <if test="userId != null">
         user_id,
-      </if>
-      <if test="shippingId != null">
-        shipping_id,
       </if>
       <if test="payment != null">
         payment,
@@ -99,9 +107,6 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="shippingId != null">
-        #{shippingId,jdbcType=INTEGER},
-      </if>
       <if test="payment != null">
         #{payment,jdbcType=DECIMAL},
       </if>
@@ -143,9 +148,6 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="shippingId != null">
-        shipping_id = #{shippingId,jdbcType=INTEGER},
-      </if>
       <if test="payment != null">
         payment = #{payment,jdbcType=DECIMAL},
       </if>
@@ -183,7 +185,6 @@
     update mall_order
     set order_no = #{orderNo,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      shipping_id = #{shippingId,jdbcType=INTEGER},
       payment = #{payment,jdbcType=DECIMAL},
       payment_type = #{paymentType,jdbcType=INTEGER},
       postage = #{postage,jdbcType=INTEGER},

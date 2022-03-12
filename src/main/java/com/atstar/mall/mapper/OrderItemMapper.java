@@ -2,6 +2,9 @@ package com.atstar.mall.mapper;
 
 import com.atstar.mall.domain.OrderItem;
 
+import java.util.List;
+import java.util.Set;
+
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,8 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    int insertBatch(List<OrderItem> orderItemList);
+
+    List<OrderItem> selectByOrderNoSet(Set<String> orderNoSet);
 }

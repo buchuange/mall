@@ -68,21 +68,28 @@
 <!--               enableSelectByExample="false"-->
 <!--               selectByExampleQueryId="false"/>-->
 
-<!--        <table tableName="mall_order" domainObjectName="Order"-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               selectByExampleQueryId="false"/>-->
+        <table tableName="mall_order" domainObjectName="Order"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
 
-<!--        <table tableName="mall_order_item" domainObjectName="OrderItem"-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               selectByExampleQueryId="false"/>-->
+        <table tableName="mall_order_shipping" domainObjectName="OrderShipping"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
 
-        <table tableName="mall_product" domainObjectName="Product"
+       <!-- <table tableName="mall_order_item" domainObjectName="OrderItem"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>-->
+
+<!--        <table tableName="mall_product" domainObjectName="Product"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -90,7 +97,7 @@
                selectByExampleQueryId="false">
             <columnOverride column="detail" jdbcType="VARCHAR"></columnOverride>
             <columnOverride column="sub_images" jdbcType="VARCHAR"></columnOverride>
-        </table>
+        </table>-->
 
 <!--        <table tableName="mall_shipping" domainObjectName="Shipping"-->
 <!--               enableCountByExample="false"-->

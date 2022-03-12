@@ -8,15 +8,15 @@ import com.atstar.mall.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Slf4j
+@Transactional
 public class CategoryServiceImplTest extends MallApplicationTests {
 
     @Autowired

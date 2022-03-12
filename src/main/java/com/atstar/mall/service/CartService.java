@@ -1,9 +1,12 @@
 package com.atstar.mall.service;
 
+import com.atstar.mall.domain.Cart;
 import com.atstar.mall.form.CartAddForm;
 import com.atstar.mall.form.CartUpdateForm;
 import com.atstar.mall.vo.CartVO;
 import com.atstar.mall.vo.ResponseVO;
+
+import java.util.List;
 
 /**
  * @Author: Dawn
@@ -24,4 +27,6 @@ public interface CartService {
     ResponseVO<CartVO> unSelectAll(Integer uid);
 
     ResponseVO<Integer> countCart(Integer uid);
+
+    List<Cart> listCart(Integer uid);
 }

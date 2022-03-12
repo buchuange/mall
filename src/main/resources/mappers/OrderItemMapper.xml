@@ -24,13 +24,26 @@
     from mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByOrderNoSet" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_order_item
+    <where>
+      <if test="orderNoSet.size() > 0">
+        order_no in
+        <foreach collection="collection" item="item" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.atstar.mall.domain.OrderItem">
     insert into mall_order_item (id, user_id, order_no, 
-      product_id, product_name, product_image, 
+      product_id, product_name, product_image,
       current_unit_price, quantity, total_price, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR},
@@ -111,7 +124,19 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.atstar.mall.domain.OrderItem">
+
+  <insert id="insertBatch" parameterType="list">
+    insert into mall_order_item (user_id, order_no,
+      product_id, product_name, product_image,
+      current_unit_price, quantity, total_price)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.userId,jdbcType=INTEGER}, #{item.orderNo,jdbcType=VARCHAR},
+      #{item.productId,jdbcType=INTEGER}, #{item.productName,jdbcType=VARCHAR}, #{item.productImage,jdbcType=VARCHAR},
+      #{item.currentUnitPrice,jdbcType=DECIMAL}, #{item.quantity,jdbcType=INTEGER}, #{item.totalPrice,jdbcType=DECIMAL})
+    </foreach>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.atstar.mall.domain.OrderItem">
     update mall_order_item
     <set>
       <if test="userId != null">
