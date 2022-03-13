@@ -5,6 +5,8 @@ import com.atstar.mall.enums.ResponseEnum;
 import com.atstar.mall.service.CategoryService;
 import com.atstar.mall.vo.CategoryVO;
 import com.atstar.mall.vo.ResponseVO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,14 @@ public class CategoryServiceImplTest extends MallApplicationTests {
     @Autowired
     private CategoryService categoryService;
 
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     @Test
     public void listCategories() {
 
         ResponseVO<List<CategoryVO>> listCategories = categoryService.listCategories();
+
+        log.info("result={}", gson.toJson(listCategories));
 
         Assert.state(ResponseEnum.SUCCESS.getCode().equals(listCategories.getStatus()), "测试失败");
 

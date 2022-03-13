@@ -211,6 +211,7 @@ public class OrderServiceImpl implements OrderService {
             return ResponseVO.error(ResponseEnum.ORDER_NOT_EXIST);
         }
 
+        // 只有未付款订单可以取消
         if (!OrderStatusEnum.NO_PAY.getCode().equals(order.getStatus())) {
             return ResponseVO.error(ResponseEnum.ORDER_STATUS_ERROR);
         }
@@ -224,6 +225,31 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return ResponseVO.success();
+    }
+
+    @Transactional
+    @Override
+    public void paid(String orderNo) {
+
+        Order order = orderMapper.selectByOrderNo(orderNo);
+
+        if (ObjectUtils.isEmpty(order)) {
+            throw new RuntimeException(ResponseEnum.ORDER_NOT_EXIST.getDesc() + "订单Id：" + orderNo);
+        }
+
+        // 只有未付款订单可以变成已付款订单
+        if (!OrderStatusEnum.NO_PAY.getCode().equals(order.getStatus())) {
+            throw new RuntimeException(ResponseEnum.ORDER_STATUS_ERROR.getDesc() + "订单Id：" + orderNo);
+        }
+
+        order.setStatus(OrderStatusEnum.PAID.getCode());
+        order.setPaymentTime(new Date());
+
+        int resultCount = orderMapper.updateByPrimaryKeySelective(order);
+        if (resultCount != 1) {
+            throw new RuntimeException("将订单更新为已支付状态失败，订单Id: " + orderNo);
+        }
+
     }
 
     private OrderVO buildOrderVO(Order order, List<OrderItem> orderItemList, OrderShipping shipping) {

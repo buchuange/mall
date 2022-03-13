@@ -17,4 +17,6 @@ public interface OrderService {
     ResponseVO<OrderVO> getOrder(Integer uid, String orderNo);
 
     ResponseVO cancelOrder(Integer uid, String orderNo);
+
+    void paid(String orderNo);
 }
